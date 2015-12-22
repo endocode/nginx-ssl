@@ -27,6 +27,7 @@ $ curl http://localhost
 ```
 You'll see a `301 Permanently Moved` message.
 
+Next line gives you the expected output:
 ```
 $ curl -k https://localhost
 ```
