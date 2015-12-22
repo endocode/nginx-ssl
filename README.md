@@ -10,27 +10,23 @@ certificate have to be created outside the container and copied into it.*
 
 ## Build
 
-Execute:
 ```
 $ docker build -t nginx-ssl:1.9.9 .
 ```
 
 ## Run
 
-Execute:
 ```
 $ docker run -p 80:80 -p 443:443 nginx-ssl:1.9.9
 ```
 
 ## Check
 
-Execute:
 ```
 $ curl http://localhost
 ```
-and you'll see a `301 Permanently Moved` message.
+You'll see a `301 Permanently Moved` message.
 
-Execute:
 ```
 $ curl -k https://localhost
 ```
@@ -40,9 +36,7 @@ You can also put `localhost` into your browser and see, what happens.
 ## Inspect
 
 You can inspect a running `nginx-ssl` instance by getting a bash inside the
-container.
-
-Execute:
+container:
 ```
 $ docker exec -t -i $(docker ps|grep nginx-ssl:1.9.9|awk '{print $1}') bash
 ```
