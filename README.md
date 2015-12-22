@@ -4,9 +4,12 @@ Very basic nginx docker container. The nginx runs on ports `80` and `443`
 inside the docker container, whereby port `80` is redirected to `443`. We only
 allow 'https'.
 
-**CAUTION:** *the key and the certificate are created, when building the container,
-for the sake of simplicity. In a real world scenario the key and the
-certificate have to be created outside the container and copied into it.*
+## Pre-Requirements
+
+```
+$ mkdir /tmp/ssl
+$ openssl req -x509 -nodes -days 1 -newkey rsa:4096 -subj "/C=DE/ST=Berlin/L=Berlin/O=Endocode AG/OU=IT/CN=localhost" -keyout /tmp/ssl/nginx.key -out /tmp/ssl/nginx.crt
+```
 
 ## Build
 
@@ -17,7 +20,7 @@ $ docker build -t nginx-ssl:1.9.9 .
 ## Run
 
 ```
-$ docker run -p 80:80 -p 443:443 nginx-ssl:1.9.9
+$ docker run -p 80:80 -p 443:443 -v /tmp/ssl/:/etc/nginx/ssl/ nginx-ssl:1.9.9
 ```
 
 ## Check

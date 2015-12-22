@@ -31,4 +31,12 @@ spec:
         image: nginx-ssl:1.9.9
         ports:
         - containerPort: 443
+        volumeMounts:
+          - mountPath: /etc/nginx/ssl/
+            name: ssl-volume
+            readOnly: true
+      volumes:
+        - hostPath:
+            path: /tmp/ssl/
+          name: ssl-volume
 
