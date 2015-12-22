@@ -1,26 +1,39 @@
-# Simple Nginx Docker Container
+# Simple Nginx SSL/TLS Docker Container
 
-Very basic nginx docker container. The nginx runs on port `80` inside the
-docker container.
+Very basic nginx docker container. The nginx runs on ports `80` and `443`
+inside the docker container, whereby port `80` is redirected to `443`. We only
+allow 'https'.
+
+**CAUTION:** *the key and the certificate are created, when building the container,
+for the sake of simplicity. In a real world scenario the key and the
+certificate have to be created outside the container and copied into it.*
 
 ## Build
 
 Execute:
 ```
-$ docker build -t simple-nginx-container .
+$ docker build -t nginx-ssl .
 ```
 
 ## Run
 
 Execute:
 ```
-$ docker run -p 8080:80 simple-nginx-container
+$ docker run -p 80:80 -p 443:443 nginx-ssl
 ```
 
 ## Check
 
 Execute:
 ```
-$ curl http://localhost:8080
+$ curl http://localhost
 ```
+and you'll see a `301 Permanently Moved` message.
+
+Execute:
+```
+$ curl -k https://localhost
+```
+
+You can also put `localhost` into your browser and see, what happens.
 
