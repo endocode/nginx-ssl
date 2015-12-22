@@ -12,14 +12,14 @@ certificate have to be created outside the container and copied into it.*
 
 Execute:
 ```
-$ docker build -t nginx-ssl .
+$ docker build -t nginx-ssl:1.9.9 .
 ```
 
 ## Run
 
 Execute:
 ```
-$ docker run -p 80:80 -p 443:443 nginx-ssl
+$ docker run -p 80:80 -p 443:443 nginx-ssl:1.9.9
 ```
 
 ## Check
