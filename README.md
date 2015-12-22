@@ -37,3 +37,13 @@ $ curl -k https://localhost
 
 You can also put `localhost` into your browser and see, what happens.
 
+## Inspect
+
+You can inspect a running `nginx-ssl` instance by getting a bash inside the
+container.
+
+Execute:
+```
+$ docker exec -t -i $(docker ps|grep nginx-ssl:1.9.9|awk '{print $1}') bash
+```
+
