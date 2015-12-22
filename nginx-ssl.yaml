@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-ssl-svc
+  labels:
+    app: nginx-ssl
+spec:
+  ports:
+  - port: 443
+    nodePort: 30443
+    name: https
+  type: NodePort
+  selector:
+    app: nginx-ssl
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx-ssl-rc
+spec:
+  replicas: 1
+  selector:
+    app: nginx-ssl
+  template:
+    metadata:
+      labels:
+        app: nginx-ssl
+    spec:
+      containers:
+      - name: nginx-ssl
+        image: nginx-ssl:1.9.9
+        ports:
+        - containerPort: 443
+

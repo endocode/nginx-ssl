@@ -42,3 +42,23 @@ container:
 $ docker exec -t -i $(docker ps|grep nginx-ssl:1.9.9|awk '{print $1}') bash
 ```
 
+# Kubernetes CoreOS Environment
+
+## Pre-Requirements
+
+* The built `nginx-ssl:1.9.9` docker container (see above)
+* A running kubernetes cluster, e.g. check out `deploy_coreos_libvirt.sh` from [https://coreos.com/os/docs/latest/booting-with-libvirt.html]
+
+## Run
+
+```
+$ kubectl create -f nginx-ssl.yaml
+```
+
+## Check
+
+```
+$ curl -k https://${CLUSTER_IP_ADDRESS}:30443
+```
+where `CLUSTER_IP_ADDRESS` is the IP address of your kubernetes master.
+
